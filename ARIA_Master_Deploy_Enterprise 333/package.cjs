@@ -16,7 +16,7 @@
     "stripe": "^16.0.0"
   }
 }
-// package.json
+// package.cjs
 {
   "dependencies": {
     "next": "^14.2.0",
