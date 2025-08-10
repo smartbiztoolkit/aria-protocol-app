@@ -1,1 +1,0 @@
-export default () => (<div className='bg-white border-y border-[rgba(212,175,55,0.25)]'><div className='max-w-6xl mx-auto px-4 py-3 text-sm grid md:grid-cols-4 gap-3 text-center'><div>🔒 Secure Checkout</div><div>🎯 Results-backed Programs</div><div>🧠 Evidence-based Methods</div><div>💬 24h Support</div></div></div>);
