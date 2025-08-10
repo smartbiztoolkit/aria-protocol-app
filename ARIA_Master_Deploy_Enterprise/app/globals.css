@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --aria-navy: #0B1B2B;
+  --aria-gold: #D4AF37;
+  --aria-warm: #FAFAFA;
+  --aria-gray: #6B7280;
+  --aria-teal: #0DD3BF;
+}
+body { @apply bg-[var(--aria-warm)] text-[var(--aria-navy)] font-sans; }
+.aria-gold-text { background: linear-gradient(135deg,#D4AF37,#F5E6A6 60%,#D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.btn-primary { @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-medium bg-[var(--aria-navy)] text-white hover:opacity-90 transition; }
+.btn-ghost { @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-medium border border-[rgba(11,27,43,0.2)] text-[var(--aria-navy)] hover:bg-white transition; }
+.card { @apply rounded-2xl border border-[rgba(212,175,55,0.25)] bg-white/70 backdrop-blur p-6 shadow; }
