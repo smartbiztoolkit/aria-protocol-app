@@ -4,19 +4,28 @@ import { products } from '@/lib/products';
 
 export default function Products() {
   const [bumpChecked, setBumpChecked] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const handleCheckout = async (priceId?: string, tier?: string) => {
+    setError(null);
     if (!priceId) return;
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ priceId, bump: bumpChecked, tier })
-    });
-    const data = await res.json();
-    if (data.url) window.location.href = data.url;
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, bump: bumpChecked, tier })
+      });
+      if (!res.ok) throw new Error('Checkout request failed');
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch (err) {
+      console.error(err);
+      setError('Could not start checkout. Please try again.');
+    }
   };
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
       <h1 className="font-display text-4xl">Choose Your ARIA Package</h1>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
       <p className="text-aria-gray mt-2">Premium, psychology-based programs built on attachment theory and emotional intelligence.</p>
       <div className="grid md:grid-cols-3 gap-6 mt-8">
         {products.map(p => (
