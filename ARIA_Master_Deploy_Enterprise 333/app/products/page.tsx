@@ -4,12 +4,12 @@ import { products } from '@/lib/products';
 
 export default function Products() {
   const [bumpChecked, setBumpChecked] = useState(true);
-  const handleCheckout = async (priceId?: string) => {
+  const handleCheckout = async (priceId?: string, tier?: string) => {
     if (!priceId) return;
     const res = await fetch('/api/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ priceId, bump: bumpChecked })
+      body: JSON.stringify({ priceId, bump: bumpChecked, tier })
     });
     const data = await res.json();
     if (data.url) window.location.href = data.url;
@@ -29,7 +29,7 @@ export default function Products() {
               <li>✔ Money-back guarantee</li>
             </ul>
             <div className="mt-4 font-semibold">${(p.price/100).toFixed(2)}</div>
-            <button className="btn-primary w-full mt-6" onClick={() => handleCheckout(p.stripePriceId)} disabled={!p.stripePriceId}>
+            <button className="btn-primary w-full mt-6" onClick={() => handleCheckout(p.stripePriceId, p.id)} disabled={!p.stripePriceId}>
               {p.stripePriceId ? 'Buy Now' : 'Set PRICE ID'}
             </button>
           </div>
