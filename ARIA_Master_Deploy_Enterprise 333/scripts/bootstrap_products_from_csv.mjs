@@ -10,16 +10,15 @@ if (!process.env.STRIPE_SECRET_KEY) {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
 
 const csvPath = path.join(process.cwd(), 'data', 'products.csv');
-const rows = fs.readFileSync(csvPath, 'utf-8').trim().split(/\n/);
-const headers = rows.shift().split(',').map(h => h.trim());
-  const cells = line.split(',').map(c => c.trim());
-  const obj = {};
-  headers.forEach((h, i) => { obj[h] = cells[i] || ''; });
-NEXT_PUBLIC_STRIPE_PRICE_STARTER=${results.find(x => x.sku === 'starter')?.priceId || ''}
-NEXT_PUBLIC_STRIPE_PRICE_PRO=${results.find(x => x.sku === 'pro')?.priceId || ''}
-NEXT_PUBLIC_STRIPE_PRICE_MASTER=${results.find(x => x.sku === 'master')?.priceId || ''}
+const rows = fs.readFileSync(csvPath, 'utf-8').trim().split(/?
+/);
+const headers = rows.shift().split(',').map(h=>h.trim());
 
-console.log('Wrote env.output.txt with the price IDs. Paste them into .env.local and Vercel.');
+function parseRow(line) {
+  const cells = line.split(',').map(c=>c.trim());
+  const obj = {}; headers.forEach((h,i)=>obj[h]=cells[i]||'');
+  return obj;
+}
 
 const items = rows.map(parseRow);
 
