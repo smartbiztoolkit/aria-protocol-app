@@ -1,10 +1,9 @@
-const { createDefaultPreset } = require('ts-jest/presets');
-const tsJestTransform = createDefaultPreset().transform;
+const { defaultsESM: tsJestPreset } = require('ts-jest/presets');
 
 module.exports = {
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   transform: {
-    ...tsJestTransform,
+    ...tsJestPreset.transform,
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
