@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { products } from '@/lib/products';
+import { products } from '../../lib/products';
 
 export default function Products() {
   const [bumpChecked, setBumpChecked] = useState(true);

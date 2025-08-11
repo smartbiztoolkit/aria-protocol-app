@@ -23,8 +23,8 @@ describe('POST /api/checkout', () => {
   });
 
   it('adds order bump line item when bump is true', async () => {
-    const { POST } = await import('@/app/api/checkout/route');
-    const { ORDER_BUMP_PRICE_ID } = await import('@/lib/products');
+    const { POST } = await import('../app/api/checkout/route');
+    const { ORDER_BUMP_PRICE_ID } = await import('../lib/products');
 
     const body = { priceId: 'base_price', bump: true, tier: '' };
     const req = { json: async () => body } as unknown as NextRequest;
@@ -42,7 +42,7 @@ describe('POST /api/checkout', () => {
   });
 
   it('includes tier value in success_url', async () => {
-    const { POST } = await import('@/app/api/checkout/route');
+    const { POST } = await import('../app/api/checkout/route');
 
     const body = { priceId: 'base_price', bump: false, tier: 'gold' };
     const req = { json: async () => body } as unknown as NextRequest;
@@ -56,4 +56,3 @@ describe('POST /api/checkout', () => {
     );
   });
 });
-

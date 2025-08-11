@@ -1,5 +1,4 @@
-import type { Config } from 'tailwindcss'
-const config: Config = {
+module.exports = {
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
@@ -9,15 +8,14 @@ const config: Config = {
           gold: '#D4AF37',
           gray: '#6B7280',
           warm: '#FAFAFA',
-          teal: '#0DD3BF'
-        }
+          teal: '#0DD3BF',
+        },
       },
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif']
-      }
-    }
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+    },
   },
-  plugins: []
-}
-export default config
+  plugins: [],
+};

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { ORDER_BUMP_PRICE_ID } from '@/lib/products';
+import { ORDER_BUMP_PRICE_ID } from '../../../lib/products';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();

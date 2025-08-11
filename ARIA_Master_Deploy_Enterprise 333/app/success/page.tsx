@@ -1,7 +1,8 @@
 'use client';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function Success() {
+function SuccessContent() {
   const params = useSearchParams();
   const tier = params.get('tier'); // 'starter-kit' | 'professional-suite' | 'master-collection'
   const nextOffer = tier === 'starter-kit' ? { name: 'Upgrade to Professional', key: 'pro-upgrade' } :
@@ -27,5 +28,13 @@ export default function Success() {
         <p className="text-aria-gray mt-6">Thanks for choosing the Master Collection. A bonus pack is on its way 🎁</p>
       )}
     </div>
+  );
+}
+
+export default function Success() {
+  return (
+    <Suspense>
+      <SuccessContent />
+    </Suspense>
   );
 }
