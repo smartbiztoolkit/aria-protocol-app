@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const UPSSELL_MAP: Record<string, string> = {
+const UPSELL_MAP: Record<string, string> = {
   'pro-upgrade': process.env.NEXT_PUBLIC_STRIPE_PRICE_UPGRADE_TO_PRO || '',
   'master-upgrade': process.env.NEXT_PUBLIC_STRIPE_PRICE_UPGRADE_TO_MASTER || ''
 };
 
 export async function POST(req: NextRequest) {
   const { offer } = await req.json();
-  const priceId = UPSSELL_MAP[offer];
+  const priceId = UPSELL_MAP[offer];
   if (!priceId) return NextResponse.json({ error: 'Offer not available' }, { status: 400 });
 
   if (!process.env.STRIPE_SECRET_KEY) return NextResponse.json({ error: 'Missing STRIPE_SECRET_KEY' }, { status: 500 });
