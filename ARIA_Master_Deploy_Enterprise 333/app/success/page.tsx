@@ -3,9 +3,9 @@ import { useSearchParams } from 'next/navigation';
 
 export default function Success() {
   const params = useSearchParams();
-  const tier = params.get('tier'); // 'starter' | 'pro' | 'master'
-  const nextOffer = tier === 'starter' ? { name: 'Upgrade to Professional', key: 'pro-upgrade' } :
-                    tier === 'pro' ? { name: 'Upgrade to Master', key: 'master-upgrade' } : null;
+  const tier = params.get('tier'); // 'starter-kit' | 'professional-suite' | 'master-collection'
+  const nextOffer = tier === 'starter-kit' ? { name: 'Upgrade to Professional', key: 'pro-upgrade' } :
+                    tier === 'professional-suite' ? { name: 'Upgrade to Master', key: 'master-upgrade' } : null;
 
   const accept = async () => {
     if (!nextOffer) return;

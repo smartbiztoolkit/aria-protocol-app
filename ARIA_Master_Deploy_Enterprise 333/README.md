@@ -57,6 +57,7 @@ Stripe Dashboard → Developers → Webhooks → Add endpoint:
 ---
 
 ### Notes
+- The `tier` query parameter uses product slugs (`starter-kit`, `professional-suite`, `master-collection`) for post-purchase logic
 - Upsell endpoint: `/api/upsell` uses `NEXT_PUBLIC_STRIPE_PRICE_UPGRADE_TO_PRO/MASTER`
 - Bump checkbox toggles a second line item in `/api/checkout`
 - Extend fulfillment logic in `/api/webhook` (email access, CRM tags, etc.)

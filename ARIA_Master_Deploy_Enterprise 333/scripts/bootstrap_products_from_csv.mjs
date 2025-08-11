@@ -25,9 +25,9 @@ const items = rows.map(parseRow);
 const results = [];
 for (const item of items) {
   const product = await stripe.products.create({
-    name: item.name,
-    description: item.description
-  });
+NEXT_PUBLIC_STRIPE_PRICE_STARTER=${results.find(x=>x.sku==='starter-kit')?.priceId || ''}
+NEXT_PUBLIC_STRIPE_PRICE_PRO=${results.find(x=>x.sku==='professional-suite')?.priceId || ''}
+NEXT_PUBLIC_STRIPE_PRICE_MASTER=${results.find(x=>x.sku==='master-collection')?.priceId || ''}
   const price = await stripe.prices.create({
     product: product.id,
     currency: item.currency || 'usd',
