@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { grantAccess, sendEmail, tagCRM } from '@/lib/webhookHandlers';
 
 export async function POST(req: NextRequest) {
   const sig = req.headers.get('stripe-signature') as string;
@@ -16,8 +17,11 @@ export async function POST(req: NextRequest) {
   }
 
   if (event.type === 'checkout.session.completed') {
-    // TODO: grant access, send emails, tag in CRM, etc.
-    console.log('Order completed:', (event.data.object as any).id);
+    const session = event.data.object as Stripe.Checkout.Session;
+    await grantAccess(session);
+    await sendEmail(session);
+    await tagCRM(session);
+    console.log('Order completed:', session.id);
   }
 
   return NextResponse.json({ received: true });
