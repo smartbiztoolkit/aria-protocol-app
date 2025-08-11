@@ -44,16 +44,28 @@ describe('POST /api/checkout', () => {
   it('includes tier value in success_url', async () => {
     const { POST } = await import('@/app/api/checkout/route');
 
-    const body = { priceId: 'base_price', bump: false, tier: 'gold' };
+    const body = { priceId: 'base_price', bump: false, tier: 'starter-kit' };
     const req = { json: async () => body } as unknown as NextRequest;
 
     await POST(req);
 
     expect(createSessionMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        success_url: expect.stringContaining('tier=gold'),
+        success_url: expect.stringContaining('tier=starter-kit'),
       }),
     );
+  });
+
+  it('rejects unknown tier', async () => {
+    const { POST } = await import('@/app/api/checkout/route');
+
+    const body = { priceId: 'base_price', bump: false, tier: 'invalid-tier' };
+    const req = { json: async () => body } as unknown as NextRequest;
+
+    const res = await POST(req);
+
+    expect(res.status).toBe(400);
+    expect(createSessionMock).not.toHaveBeenCalled();
   });
 });
 
