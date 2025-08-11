@@ -6,13 +6,19 @@ export default function Products() {
   const [bumpChecked, setBumpChecked] = useState(true);
   const handleCheckout = async (priceId?: string, tier?: string) => {
     if (!priceId) return;
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ priceId, bump: bumpChecked, tier })
-    });
-    const data = await res.json();
-    if (data.url) window.location.href = data.url;
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, bump: bumpChecked, tier })
+      });
+      if (!res.ok) throw new Error('Request failed');
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch (err) {
+      console.error('Checkout request failed', err);
+      alert('Unable to start checkout. Please try again later.');
+    }
   };
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
