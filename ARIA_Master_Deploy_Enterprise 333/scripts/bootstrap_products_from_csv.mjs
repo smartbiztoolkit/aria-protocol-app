@@ -10,9 +10,8 @@ if (!process.env.STRIPE_SECRET_KEY) {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
 
 const csvPath = path.join(process.cwd(), 'data', 'products.csv');
-const rows = fs.readFileSync(csvPath, 'utf-8').trim().split(/?
-/);
-const headers = rows.shift().split(',').map(h=>h.trim());
+const rows = fs.readFileSync(csvPath, 'utf-8').trim().split(/\n/);
+console.log('Wrote env.output.txt with the price IDs. Paste them into .env.local and Vercel.');
 
 function parseRow(line) {
   const cells = line.split(',').map(c=>c.trim());
